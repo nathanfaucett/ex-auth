@@ -6,6 +6,6 @@ otp_release:
 services:
   - postgresql
 before_script:
-  - psql -c "CREATE USER dev WITH PASSWORD 'dev';" -U postgres
+  - psql -c "CREATE USER dev WITH PASSWORD 'dev' CREATEDB;" -U postgres
   - mix ecto.create -r AuthService.Repo
   - mix ecto.migrate -r AuthService.Repo
