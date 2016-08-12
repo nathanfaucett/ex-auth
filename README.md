@@ -1,4 +1,4 @@
-# AuthService
+# AuthService [![Build Status](https://travis-ci.org/nathanfaucett/ex-auth_service.svg?branch=master)](https://travis-ci.org/nathanfaucett/ex-auth_service)
 
 auth services api for managing users in applications
 
