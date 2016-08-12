@@ -7,7 +7,7 @@ defmodule AuthServiceTest.ConfirmTest do
     user = AuthServiceTest.HelpersTest.create_user()
 
     {:ok, confirmed_user} = AuthService.Confirm.call(%{
-      "uuid" => AuthServiceTest.HelpersTest.test_uuid,
+      "id" => AuthServiceTest.HelpersTest.test_id,
       "confirmation_token" => Map.get(user, :confirmation_token)
     })
     AuthService.Repo.delete!(user)

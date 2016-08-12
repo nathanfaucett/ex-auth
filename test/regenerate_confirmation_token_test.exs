@@ -8,7 +8,7 @@ defmodule AuthServiceTest.RegenerateConfirmationTokenTest do
     old_confirmation_token = Map.get(user, :confirmation_token)
 
     {:ok, new_confirmation_token_user} = AuthService.RegenerateConfirmationToken.call(%{
-      "uuid" => AuthServiceTest.HelpersTest.test_uuid
+      "id" => AuthServiceTest.HelpersTest.test_id
     })
 
     assert Map.get(new_confirmation_token_user, :confirmed) == false
@@ -16,7 +16,7 @@ defmodule AuthServiceTest.RegenerateConfirmationTokenTest do
 
 
     {:ok, confirmed_user} = AuthService.Confirm.call(%{
-      "uuid" => AuthServiceTest.HelpersTest.test_uuid,
+      "id" => AuthServiceTest.HelpersTest.test_id,
       "confirmation_token" => Map.get(user, :confirmation_token)
     })
     AuthService.Repo.delete!(user)

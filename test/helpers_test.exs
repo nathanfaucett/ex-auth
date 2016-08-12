@@ -6,7 +6,7 @@ defmodule AuthServiceTest.HelpersTest do
 
   @test_email "__test__email__@__test__.com"
   @test_password "!12ABcd"
-  @test_uuid "d9c5be3c-b969-5932-a989-8cda474bed1d"
+  @test_id "d9c5be3c-b969-5932-a989-8cda474bed1d"
 
   def test_email() do
     @test_email
@@ -16,8 +16,8 @@ defmodule AuthServiceTest.HelpersTest do
     @test_password
   end
 
-  def test_uuid() do
-    @test_uuid
+  def test_id() do
+    @test_id
   end
 
   def create_user() do

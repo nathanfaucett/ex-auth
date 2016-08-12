@@ -5,7 +5,7 @@ defmodule AuthService.Repo.Migrations.CreateUsersTable do
   def change do
     create table(:users, primary_key: false) do
 
-      add :uuid, :string, primary_key: true
+      add :id, :binary_id, primary_key: true
       add :email, :string
 
       add :active, :boolean

@@ -2,7 +2,7 @@ defmodule AuthService.Get do
 
   def prop_types do
     %{
-      "uuid" => PropTypes.required(PropTypes.string)
+      "id" => PropTypes.required(PropTypes.string)
     }
   end
 
@@ -12,8 +12,8 @@ defmodule AuthService.Get do
     if errors != nil do
       {:error, errors}
     else
-      uuid = Map.get(params, "uuid")
-      user = AuthService.Repo.get_by(AuthService.User, uuid: uuid)
+      id = Map.get(params, "uuid")
+      user = AuthService.Repo.get_by(AuthService.User, id: id)
 
       if !user do
         {:error, %{"errors": [RuntimeError.exception("auth_service.user_not_found")]}}

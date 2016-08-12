@@ -7,7 +7,7 @@ defmodule AuthService.User do
   @primary_key false
   schema "users" do
 
-    field :uuid, :string, primary_key: true
+    field :id, :binary_id, primary_key: true
     field :email, :string
 
     field :active, :boolean, default: true
@@ -20,7 +20,7 @@ defmodule AuthService.User do
     timestamps
   end
 
-  @required_fields ~w(uuid email encrypted_password)
+  @required_fields ~w(id email encrypted_password)
   @optional_fields ~w(active confirmed confirmation_token)
 
   def create_token() do

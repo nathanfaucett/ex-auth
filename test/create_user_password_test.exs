@@ -7,7 +7,7 @@ defmodule AuthServiceTest.CreateUserPasswordTest do
     user = AuthServiceTest.HelpersTest.create_user()
     AuthService.Repo.delete!(user)
 
-    assert Map.get(user, :uuid) == AuthServiceTest.HelpersTest.test_uuid
+    assert Map.get(user, :id) == AuthServiceTest.HelpersTest.test_id
     assert Map.get(user, :email) == AuthServiceTest.HelpersTest.test_email
   end
 end

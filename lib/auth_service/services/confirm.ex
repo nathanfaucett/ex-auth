@@ -2,7 +2,7 @@ defmodule AuthService.Confirm do
 
   def prop_types do
     %{
-      "uuid" => PropTypes.required(PropTypes.string),
+      "id" => PropTypes.required(PropTypes.string),
       "confirmation_token" => PropTypes.required(PropTypes.string)
     }
   end
@@ -13,9 +13,9 @@ defmodule AuthService.Confirm do
     if errors != nil do
       {:error, errors}
     else
-      uuid = Map.get(params, "uuid")
+      id = Map.get(params, "id")
       confirmation_token = Map.get(params, "confirmation_token")
-      user = AuthService.Repo.get_by(AuthService.User, uuid: uuid)
+      user = AuthService.Repo.get_by(AuthService.User, id: id)
 
       if !user do
         {:error, %{"errors": [RuntimeError.exception("auth_service.user_not_found")]}}

@@ -12,6 +12,6 @@ defmodule AuthServiceTest.AuthorizedPasswordTest do
     })
     AuthService.Repo.delete!(user)
 
-    assert Map.get(authorized_user, :uuid) == AuthServiceTest.HelpersTest.test_uuid
+    assert Map.get(authorized_user, :id) == AuthServiceTest.HelpersTest.test_id
   end
 end

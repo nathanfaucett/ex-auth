@@ -16,13 +16,13 @@ defmodule AuthService.CreateUserPassword do
       {:error, errors}
     else
       email = Map.get(params, "email")
-      uuid = UUID.uuid5(:dns, email, :default)
+      id = UUID.uuid5(:dns, email)
 
       password = Map.get(params, "password")
       encrypted_password = Bcrypt.hashpwsalt(password)
 
       {ok, user} = AuthService.Repo.insert(AuthService.User.changeset(%AuthService.User{}, %{
-        :uuid => uuid,
+        :id => id,
         :email => email,
 
         :confirmed => false,

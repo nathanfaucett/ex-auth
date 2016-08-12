@@ -48,7 +48,7 @@ CREATE TABLE schema_migrations (
 --
 
 CREATE TABLE users (
-    uuid character varying(255) NOT NULL,
+    id uuid NOT NULL,
     email character varying(255),
     active boolean,
     confirmed boolean,
@@ -72,7 +72,7 @@ ALTER TABLE ONLY schema_migrations
 --
 
 ALTER TABLE ONLY users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (uuid);
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
 --
