@@ -1,9 +1,11 @@
 defmodule AuthService.AuthorizedPassword do
   alias Comeonin.Bcrypt
+  import AuthService.Gettext
 
 
   def prop_types do
     %{
+      "locale" => PropTypes.required(PropTypes.string),
       "email" => PropTypes.required(PropTypes.string),
       "password" => PropTypes.required(PropTypes.string)
     }
@@ -15,18 +17,20 @@ defmodule AuthService.AuthorizedPassword do
     if errors != nil do
       {:error, errors}
     else
+      Gettext.put_locale(AuthService.Gettext, Map.get(params, "locale"))
+
       email = Map.get(params, "email")
       user = AuthService.Repo.get_by(AuthService.User, email: email)
 
       if !user do
-        {:error, %{"errors": [RuntimeError.exception("auth_service.user_not_found")]}}
+        {:error, %{"errors" => [RuntimeError.exception(gettext("user_not_found"))]}}
       else
         password = Map.get(params, "password")
 
         if Bcrypt.checkpw(password, Map.get(user, :encrypted_password)) == true do
           {:ok, user}
         else
-          {:error, %{"errors": [RuntimeError.exception("auth_service.invalid_password")]}}
+          {:error, %{"errors" => [RuntimeError.exception(gettext("invalid_password"))]}}
         end
       end
     end

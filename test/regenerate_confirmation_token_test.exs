@@ -8,6 +8,7 @@ defmodule AuthServiceTest.RegenerateConfirmationTokenTest do
     old_confirmation_token = Map.get(user, :confirmation_token)
 
     {:ok, new_confirmation_token_user} = AuthService.RegenerateConfirmationToken.call(%{
+      "locale" => AuthServiceTest.HelpersTest.test_locale,
       "id" => AuthServiceTest.HelpersTest.test_id
     })
 
@@ -16,6 +17,7 @@ defmodule AuthServiceTest.RegenerateConfirmationTokenTest do
 
 
     {:ok, confirmed_user} = AuthService.Confirm.call(%{
+      "locale" => AuthServiceTest.HelpersTest.test_locale,
       "id" => AuthServiceTest.HelpersTest.test_id,
       "confirmation_token" => Map.get(user, :confirmation_token)
     })

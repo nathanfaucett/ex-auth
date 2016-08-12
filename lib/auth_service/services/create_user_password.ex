@@ -1,9 +1,11 @@
 defmodule AuthService.CreateUserPassword do
   alias Comeonin.Bcrypt
+  import AuthService.Gettext
 
 
   def prop_types do
     %{
+      "locale" => PropTypes.required(PropTypes.string),
       "email" => PropTypes.required(PropTypes.string),
       "password" => PropTypes.required(PropTypes.string)
     }
@@ -15,6 +17,8 @@ defmodule AuthService.CreateUserPassword do
     if errors != nil do
       {:error, errors}
     else
+      Gettext.put_locale(AuthService.Gettext, Map.get(params, "locale"))
+
       email = Map.get(params, "email")
       id = UUID.uuid5(:dns, email)
 
@@ -34,7 +38,7 @@ defmodule AuthService.CreateUserPassword do
       if ok == :ok do
         {:ok, user}
       else
-        {:error, %{"errors": [RuntimeError.exception("auth_service.internal_error")]}}
+        {:error, %{"errors" => [RuntimeError.exception(gettext("internal_error"))]}}
       end
     end
   end

@@ -9,7 +9,8 @@ defmodule AuthService.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps,
+     compilers: [:gettext] ++ Mix.compilers]
   end
 
   # Configuration for the OTP application
@@ -17,6 +18,7 @@ defmodule AuthService.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [
+      :gettext,
       :postgrex,
       :ecto,
       :prop_types,
@@ -35,7 +37,8 @@ defmodule AuthService.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:postgrex, "~> 0.11.2"},
+    [{:gettext, "~> 0.8"},
+      {:postgrex, "~> 0.11.2"},
       {:ecto, "~> 2.0.4"},
       {:prop_types, "0.0.2"},
       {:uuid, "~> 1.1.4"},

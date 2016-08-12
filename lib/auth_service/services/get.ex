@@ -1,7 +1,10 @@
 defmodule AuthService.Get do
+  import AuthService.Gettext
+
 
   def prop_types do
     %{
+      "locale" => PropTypes.required(PropTypes.string),
       "id" => PropTypes.required(PropTypes.string)
     }
   end
@@ -12,11 +15,13 @@ defmodule AuthService.Get do
     if errors != nil do
       {:error, errors}
     else
+      Gettext.put_locale(AuthService.Gettext, Map.get(params, "locale"))
+
       id = Map.get(params, "uuid")
       user = AuthService.Repo.get_by(AuthService.User, id: id)
 
       if !user do
-        {:error, %{"errors": [RuntimeError.exception("auth_service.user_not_found")]}}
+        {:error, %{"errors" => [RuntimeError.exception(gettext("user_not_found"))]}}
       else
         {:ok, user}
       end
