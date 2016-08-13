@@ -40,7 +40,7 @@ defmodule AuthService.Mixfile do
     [{:gettext, "~> 0.8"},
       {:postgrex, "~> 0.11.2"},
       {:ecto, "~> 2.0.4"},
-      {:prop_types, "0.0.2"},
+      {:prop_types, git: "git://github.com/nathanfaucett/ex-prop_types.git"},
       {:uuid, "~> 1.1.4"},
       {:comeonin, "~> 2.5.2"}]
   end
