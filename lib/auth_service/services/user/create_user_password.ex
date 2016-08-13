@@ -1,4 +1,4 @@
-defmodule AuthService.CreateUserPassword do
+defmodule AuthService.Services.User.CreateUserPassword do
   alias Comeonin.Bcrypt
   import AuthService.Gettext
 
@@ -25,12 +25,12 @@ defmodule AuthService.CreateUserPassword do
       password = Map.get(params, "password")
       encrypted_password = Bcrypt.hashpwsalt(password)
 
-      {ok, user} = AuthService.Repo.insert(AuthService.User.changeset(%AuthService.User{}, %{
+      {ok, user} = AuthService.Repo.insert(AuthService.Models.User.changeset(%AuthService.Models.User{}, %{
         :id => id,
         :email => email,
 
         :confirmed => false,
-        :confirmation_token => AuthService.User.create_token(),
+        :confirmation_token => AuthService.Models.User.create_token(),
 
         :encrypted_password => encrypted_password
       }))

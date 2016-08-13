@@ -1,4 +1,4 @@
-defmodule AuthServiceTest.HelpersTest do
+defmodule AuthServiceTest.User.HelpersTest do
   use ExUnit.Case
   doctest AuthService
 
@@ -14,7 +14,7 @@ defmodule AuthServiceTest.HelpersTest do
   def test_id(), do: @test_id
 
   def create_user() do
-    {:ok, user} = AuthService.CreateUserPassword.call(%{
+    {:ok, user} = AuthService.Services.User.CreateUserPassword.call(%{
       "locale" => @test_locale,
       "email" => @test_email,
       "password" => @test_password

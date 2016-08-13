@@ -1,4 +1,4 @@
-defmodule AuthService.SetActive do
+defmodule AuthService.Services.User.Confirm do
   import AuthService.Gettext
 
 
@@ -6,7 +6,7 @@ defmodule AuthService.SetActive do
     %{
       "locale" => PropTypes.required(PropTypes.string),
       "id" => PropTypes.required(PropTypes.string),
-      "active" => PropTypes.required(PropTypes.boolean)
+      "confirmation_token" => PropTypes.required(PropTypes.string)
     }
   end
 
@@ -19,25 +19,21 @@ defmodule AuthService.SetActive do
       Gettext.put_locale(AuthService.Gettext, Map.get(params, "locale"))
 
       id = Map.get(params, "id")
-      user = AuthService.Repo.get_by(AuthService.User, id: id)
+      confirmation_token = Map.get(params, "confirmation_token")
+      user = AuthService.Repo.get_by(AuthService.Models.User, id: id)
 
       if !user do
         {:error, %{"errors" => [RuntimeError.exception(gettext("user_not_found"))]}}
       else
-        active = Map.get(params, "active")
+        {ok, confirmed_user} = AuthService.Repo.update(AuthService.Models.User.changeset(user, %{
+          :confirmed => true,
+          :confirmation_token => nil
+        }))
 
-        if Map.get(user, :active) == active do
-          {:ok, user}
+        if ok == :ok do
+          {:ok, confirmed_user}
         else
-          {ok, new_active_state_user} = AuthService.Repo.update(AuthService.User.changeset(user, %{
-            :active => active,
-          }))
-
-          if ok == :ok do
-            {:ok, new_active_state_user}
-          else
-            {:error, %{"errors" => [RuntimeError.exception(gettext("internal_error"))]}}
-          end
+          {:error, %{"errors" => [RuntimeError.exception(gettext("internal_error"))]}}
         end
       end
     end

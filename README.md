@@ -33,12 +33,17 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 ## Usage
 
 ```elixir
+# Main Modules
+# AuthService.Repo
+# AuthService.Models.User
+# AuthService.Services.User
+
 defmodule Example do
 
   def example() do
 
     # create user from email and password
-    {:ok, user} = AuthService.CreateUserPassword.call(%{
+    {:ok, user} = AuthService.Services.User.CreateUserPassword.call(%{
         "email" => "some_email@domain.com",
         "password" => "some_password"
     })

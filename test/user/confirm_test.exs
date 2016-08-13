@@ -1,14 +1,14 @@
-defmodule AuthServiceTest.ConfirmTest do
+defmodule AuthServiceTest.User.ConfirmTest do
   use ExUnit.Case
   doctest AuthService
 
 
   test "should confirm user's account" do
-    user = AuthServiceTest.HelpersTest.create_user()
+    user = AuthServiceTest.User.HelpersTest.create_user()
 
-    {:ok, confirmed_user} = AuthService.Confirm.call(%{
-      "locale" => AuthServiceTest.HelpersTest.test_locale,
-      "id" => AuthServiceTest.HelpersTest.test_id,
+    {:ok, confirmed_user} = AuthService.Services.User.Confirm.call(%{
+      "locale" => AuthServiceTest.User.HelpersTest.test_locale,
+      "id" => AuthServiceTest.User.HelpersTest.test_id,
       "confirmation_token" => Map.get(user, :confirmation_token)
     })
     AuthService.Repo.delete!(user)

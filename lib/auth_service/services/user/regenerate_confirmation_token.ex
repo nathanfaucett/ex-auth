@@ -1,4 +1,4 @@
-defmodule AuthService.RegenerateConfirmationToken do
+defmodule AuthService.Services.User.RegenerateConfirmationToken do
   import AuthService.Gettext
 
 
@@ -18,7 +18,7 @@ defmodule AuthService.RegenerateConfirmationToken do
       Gettext.put_locale(AuthService.Gettext, Map.get(params, "locale"))
 
       id = Map.get(params, "id")
-      user = AuthService.Repo.get_by(AuthService.User, id: id)
+      user = AuthService.Repo.get_by(AuthService.Models.User, id: id)
 
       if !user do
         {:error, %{"errors" => [RuntimeError.exception(gettext("user_not_found"))]}}
@@ -26,8 +26,8 @@ defmodule AuthService.RegenerateConfirmationToken do
         if Map.get(user, :confirmed) == true do
           {:error, %{"errors" => [RuntimeError.exception(gettext("user_already_confirmed"))]}}
         else
-          {ok, new_confirmation_token_user} = AuthService.Repo.update(AuthService.User.changeset(user, %{
-            :confirmation_token => AuthService.User.create_token(),
+          {ok, new_confirmation_token_user} = AuthService.Repo.update(AuthService.Models.User.changeset(user, %{
+            :confirmation_token => AuthService.Models.User.create_token(),
           }))
 
           if ok == :ok do

@@ -1,4 +1,4 @@
-defmodule AuthService.AuthorizedPassword do
+defmodule AuthService.Services.User.AuthorizedPassword do
   alias Comeonin.Bcrypt
   import AuthService.Gettext
 
@@ -20,7 +20,7 @@ defmodule AuthService.AuthorizedPassword do
       Gettext.put_locale(AuthService.Gettext, Map.get(params, "locale"))
 
       email = Map.get(params, "email")
-      user = AuthService.Repo.get_by(AuthService.User, email: email)
+      user = AuthService.Repo.get_by(AuthService.Models.User, email: email)
 
       if !user do
         {:error, %{"errors" => [RuntimeError.exception(gettext("user_not_found"))]}}

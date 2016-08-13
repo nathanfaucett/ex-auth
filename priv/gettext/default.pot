@@ -11,22 +11,25 @@ msgid ""
 msgstr ""
 "Language: INSERT LANGUAGE HERE\n"
 
-#: lib/auth_service/services/confirm.ex:36
-#: lib/auth_service/services/create_user_password.ex:41
-#: lib/auth_service/services/regenerate_confirmation_token.ex:36
+#: lib/auth_service/services/user/confirm.ex:36
+#: lib/auth_service/services/user/create_user_password.ex:41
+#: lib/auth_service/services/user/regenerate_confirmation_token.ex:36
+#: lib/auth_service/services/user/set_active.ex:39
 msgid "internal_error"
 msgstr ""
 
-#: lib/auth_service/services/authorized_password.ex:33
+#: lib/auth_service/services/user/authorized_password.ex:33
 msgid "invalid_password"
 msgstr ""
 
-#: lib/auth_service/services/regenerate_confirmation_token.ex:27
+#: lib/auth_service/services/user/regenerate_confirmation_token.ex:27
 msgid "user_already_confirmed"
 msgstr ""
 
-#: lib/auth_service/services/authorized_password.ex:26
-#: lib/auth_service/services/confirm.ex:26 lib/auth_service/services/get.ex:24
-#: lib/auth_service/services/regenerate_confirmation_token.ex:24
+#: lib/auth_service/services/user/authorized_password.ex:26
+#: lib/auth_service/services/user/confirm.ex:26
+#: lib/auth_service/services/user/get.ex:24
+#: lib/auth_service/services/user/regenerate_confirmation_token.ex:24
+#: lib/auth_service/services/user/set_active.ex:25
 msgid "user_not_found"
 msgstr ""
