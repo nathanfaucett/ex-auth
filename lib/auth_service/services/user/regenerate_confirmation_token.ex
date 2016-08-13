@@ -27,7 +27,7 @@ defmodule AuthService.Services.User.RegenerateConfirmationToken do
           {:error, %{"errors" => [RuntimeError.exception(gettext("user_already_confirmed"))]}}
         else
           {ok, new_confirmation_token_user} = AuthService.Repo.update(AuthService.Models.User.changeset(user, %{
-            :confirmation_token => AuthService.Models.User.create_token(),
+            :confirmation_token => AuthService.Utils.create_token(),
           }))
 
           if ok == :ok do

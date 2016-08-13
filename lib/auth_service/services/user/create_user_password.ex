@@ -30,7 +30,7 @@ defmodule AuthService.Services.User.CreateUserPassword do
         :email => email,
 
         :confirmed => false,
-        :confirmation_token => AuthService.Models.User.create_token(),
+        :confirmation_token => AuthService.Utils.create_token(),
 
         :encrypted_password => encrypted_password
       }))

@@ -23,12 +23,6 @@ defmodule AuthService.Models.User do
   @required_fields ~w(id email encrypted_password)
   @optional_fields ~w(active confirmed confirmation_token)
 
-  def create_token() do
-    :crypto.strong_rand_bytes(64)
-      |> Base.url_encode64()
-      |> binary_part(0, 64)
-  end
-
   def changeset(user, params \\ :empty) do
     user
       |> cast(params, @required_fields, @optional_fields)
