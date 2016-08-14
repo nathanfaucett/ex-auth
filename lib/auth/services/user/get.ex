@@ -17,11 +17,10 @@ defmodule Auth.Services.User.Get do
     else
       Gettext.put_locale(Auth.Gettext, Map.get(params, "locale"))
 
-      id = Map.get(params, "uuid")
-      user = Auth.Repo.get_by(Auth.Models.User, id: id)
+      user = Auth.Repo.get_by(Auth.Models.User, id:  Map.get(params, "uuid"))
 
-      if !user do
-        {:error, %{"errors" => [RuntimeError.exception(gettext("user_not_found"))]}}
+      if user == nil do
+        {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "User not found"))]}}
       else
         {:ok, user}
       end

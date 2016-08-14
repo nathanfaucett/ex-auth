@@ -1,4 +1,4 @@
-defmodule Auth.Services.User.Confirm do
+defmodule Auth.Services.User.ChangeEmail do
   import Auth.Gettext
 
 
@@ -6,7 +6,7 @@ defmodule Auth.Services.User.Confirm do
     %{
       "locale" => PropTypes.required(PropTypes.string),
       "id" => PropTypes.required(PropTypes.string),
-      "confirmation_token" => PropTypes.required(PropTypes.string)
+      "email" => PropTypes.required(PropTypes.string)
     }
   end
 
@@ -17,25 +17,28 @@ defmodule Auth.Services.User.Confirm do
       {:error, errors}
     else
       Gettext.put_locale(Auth.Gettext, Map.get(params, "locale"))
-
-      user = Auth.Repo.get_by(Auth.Models.User, id:  Map.get(params, "id"))
+      user = Auth.Repo.get_by(Auth.Models.User, id: Map.get(params, "id"))
 
       if user == nil do
         {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "User not found"))]}}
       else
-        if Map.get(user, :confirmation_token) != Map.get(params, "confirmation_token") do
-          {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "Invalid Confirmation Token"))]}}
-        else
-          {ok, confirmed_user} = Auth.Repo.update(Auth.Models.User.changeset(user, %{
-            :confirmed => true,
-            :confirmation_token => nil
+        new_email = Map.get(params, "email")
+
+        if new_email != Map.get(user, :email) do
+          {ok, new_email_user} = Auth.Repo.update(Auth.Models.User.changeset(user, %{
+            :email => new_email,
+
+            :confirmed => false,
+            :confirmation_token => Auth.Utils.create_token(),
           }))
 
           if ok == :ok do
-            {:ok, confirmed_user}
+            {:ok, new_email_user}
           else
             {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "Internal Error"))]}}
           end
+        else
+          {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "Invalid Password"))]}}
         end
       end
     end

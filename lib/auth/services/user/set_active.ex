@@ -18,11 +18,10 @@ defmodule Auth.Services.User.SetActive do
     else
       Gettext.put_locale(Auth.Gettext, Map.get(params, "locale"))
 
-      id = Map.get(params, "id")
-      user = Auth.Repo.get_by(Auth.Models.User, id: id)
+      user = Auth.Repo.get_by(Auth.Models.User, id: Map.get(params, "id"))
 
-      if !user do
-        {:error, %{"errors" => [RuntimeError.exception(gettext("user_not_found"))]}}
+      if user == nil do
+        {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "User not found"))]}}
       else
         active = Map.get(params, "active")
 
@@ -36,7 +35,7 @@ defmodule Auth.Services.User.SetActive do
           if ok == :ok do
             {:ok, new_active_state_user}
           else
-            {:error, %{"errors" => [RuntimeError.exception(gettext("internal_error"))]}}
+            {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "Internal Error"))]}}
           end
         end
       end

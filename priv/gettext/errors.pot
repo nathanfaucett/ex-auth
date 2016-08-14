@@ -1,0 +1,44 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: lib/auth/services/user/change_email.ex:38
+#: lib/auth/services/user/change_password.ex:35
+#: lib/auth/services/user/confirm.ex:37
+#: lib/auth/services/user/create_user_password.ex:35
+#: lib/auth/services/user/regenerate_confirmation_token.ex:35
+#: lib/auth/services/user/set_active.ex:38
+msgid "Internal Error"
+msgstr ""
+
+#: lib/auth/services/user/confirm.ex:27
+msgid "Invalid Confirmation Token"
+msgstr ""
+
+#: lib/auth/services/user/authorized_password.ex:29
+#: lib/auth/services/user/change_email.ex:41
+#: lib/auth/services/user/change_password.ex:38
+msgid "Invalid Password"
+msgstr ""
+
+#: lib/auth/services/user/regenerate_confirmation_token.ex:26
+msgid "User already confirmed"
+msgstr ""
+
+#: lib/auth/services/user/authorized_password.ex:24
+#: lib/auth/services/user/change_email.ex:23
+#: lib/auth/services/user/change_password.ex:25
+#: lib/auth/services/user/confirm.ex:24 lib/auth/services/user/get.ex:23
+#: lib/auth/services/user/regenerate_confirmation_token.ex:23
+#: lib/auth/services/user/set_active.ex:24
+msgid "User not found"
+msgstr ""

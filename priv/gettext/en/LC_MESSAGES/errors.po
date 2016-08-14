@@ -1,0 +1,43 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: lib/auth/services/user/change_email.ex:38
+#: lib/auth/services/user/change_password.ex:35
+#: lib/auth/services/user/confirm.ex:37
+#: lib/auth/services/user/create_user_password.ex:35
+#: lib/auth/services/user/regenerate_confirmation_token.ex:35
+#: lib/auth/services/user/set_active.ex:38
+msgid "Internal Error"
+msgstr ""
+
+#: lib/auth/services/user/confirm.ex:27
+msgid "Invalid Confirmation Token"
+msgstr ""
+
+#: lib/auth/services/user/authorized_password.ex:29
+#: lib/auth/services/user/change_email.ex:41
+#: lib/auth/services/user/change_password.ex:38
+msgid "Invalid Password"
+msgstr ""
+
+#: lib/auth/services/user/regenerate_confirmation_token.ex:26
+msgid "User already confirmed"
+msgstr ""
+
+#: lib/auth/services/user/authorized_password.ex:24
+#: lib/auth/services/user/change_email.ex:23
+#: lib/auth/services/user/change_password.ex:25
+#: lib/auth/services/user/confirm.ex:24 lib/auth/services/user/get.ex:23
+#: lib/auth/services/user/regenerate_confirmation_token.ex:23
+#: lib/auth/services/user/set_active.ex:24
+msgid "User not found"
+msgstr ""

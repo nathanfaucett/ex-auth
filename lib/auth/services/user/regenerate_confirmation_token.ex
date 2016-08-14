@@ -17,14 +17,13 @@ defmodule Auth.Services.User.RegenerateConfirmationToken do
     else
       Gettext.put_locale(Auth.Gettext, Map.get(params, "locale"))
 
-      id = Map.get(params, "id")
-      user = Auth.Repo.get_by(Auth.Models.User, id: id)
+      user = Auth.Repo.get_by(Auth.Models.User, id: Map.get(params, "id"))
 
-      if !user do
-        {:error, %{"errors" => [RuntimeError.exception(gettext("user_not_found"))]}}
+      if user == nil do
+        {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "User not found"))]}}
       else
-        if Map.get(user, :confirmed) == true do
-          {:error, %{"errors" => [RuntimeError.exception(gettext("user_already_confirmed"))]}}
+        if Map.get(user, :confirmed) do
+          {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "User already confirmed"))]}}
         else
           {ok, new_confirmation_token_user} = Auth.Repo.update(Auth.Models.User.changeset(user, %{
             :confirmation_token => Auth.Utils.create_token(),
@@ -33,7 +32,7 @@ defmodule Auth.Services.User.RegenerateConfirmationToken do
           if ok == :ok do
             {:ok, new_confirmation_token_user}
           else
-            {:error, %{"errors" => [RuntimeError.exception(gettext("internal_error"))]}}
+            {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "Internal Error"))]}}
           end
         end
       end

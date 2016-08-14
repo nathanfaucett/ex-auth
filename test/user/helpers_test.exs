@@ -4,8 +4,8 @@ defmodule AuthServiceTest.User.HelpersTest do
 
 
   @test_locale "en"
-  @test_email "__test__email__@__test__.com"
-  @test_password "!12ABcd"
+  @test_email "email@domain.com"
+  @test_password "password"
 
   def test_locale(), do: @test_locale
   def test_email(), do: @test_email

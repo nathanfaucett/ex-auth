@@ -19,26 +19,20 @@ defmodule Auth.Services.User.CreateUserPassword do
     else
       Gettext.put_locale(Auth.Gettext, Map.get(params, "locale"))
 
-      email = Map.get(params, "email")
-      id = Auth.Utils.create_uuid()
-
-      password = Map.get(params, "password")
-      encrypted_password = Bcrypt.hashpwsalt(password)
-
       {ok, user} = Auth.Repo.insert(Auth.Models.User.changeset(%Auth.Models.User{}, %{
-        :id => id,
-        :email => email,
+        :id => Auth.Utils.create_uuid(),
+        :email => Map.get(params, "email"),
 
         :confirmed => false,
         :confirmation_token => Auth.Utils.create_token(),
 
-        :encrypted_password => encrypted_password
+        :encrypted_password => Bcrypt.hashpwsalt(Map.get(params, "password"))
       }))
 
       if ok == :ok do
         {:ok, user}
       else
-        {:error, %{"errors" => [RuntimeError.exception(gettext("internal_error"))]}}
+        {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "Internal Error"))]}}
       end
     end
   end

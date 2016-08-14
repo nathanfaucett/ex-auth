@@ -18,19 +18,15 @@ defmodule Auth.Services.User.AuthorizedPassword do
       {:error, errors}
     else
       Gettext.put_locale(Auth.Gettext, Map.get(params, "locale"))
+      user = Auth.Repo.get_by(Auth.Models.User, email: Map.get(params, "email"))
 
-      email = Map.get(params, "email")
-      user = Auth.Repo.get_by(Auth.Models.User, email: email)
-
-      if !user do
-        {:error, %{"errors" => [RuntimeError.exception(gettext("user_not_found"))]}}
+      if user == nil do
+        {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "User not found"))]}}
       else
-        password = Map.get(params, "password")
-
-        if Bcrypt.checkpw(password, Map.get(user, :encrypted_password)) == true do
+        if Bcrypt.checkpw(Map.get(params, "password"), Map.get(user, :encrypted_password)) do
           {:ok, user}
         else
-          {:error, %{"errors" => [RuntimeError.exception(gettext("invalid_password"))]}}
+          {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "Invalid Password"))]}}
         end
       end
     end

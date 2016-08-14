@@ -12,14 +12,14 @@ defmodule AuthServiceTest.User.RegenerateConfirmationTokenTest do
       "id" => Map.get(user, :id)
     })
 
-    assert Map.get(new_confirmation_token_user, :confirmed) == false
-    assert Map.get(new_confirmation_token_user, :confirmation_token) != old_confirmation_token
+    new_confirmation_token = Map.get(new_confirmation_token_user, :confirmation_token)
+    assert new_confirmation_token != old_confirmation_token
 
 
     {:ok, confirmed_user} = Auth.Services.User.Confirm.call(%{
       "locale" => AuthServiceTest.User.HelpersTest.test_locale,
       "id" => Map.get(user, :id),
-      "confirmation_token" => Map.get(user, :confirmation_token)
+      "confirmation_token" => new_confirmation_token
     })
     Auth.Repo.delete!(user)
 
