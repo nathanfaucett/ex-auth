@@ -1,4 +1,4 @@
-defmodule AuthService.Repo.Migrations.CreateUsersTable do
+defmodule Auth.Repo.Migrations.CreateUsersTable do
   use Ecto.Migration
 
 

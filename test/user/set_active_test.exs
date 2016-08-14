@@ -1,18 +1,18 @@
 defmodule AuthServiceTest.User.SetActiveTest do
   use ExUnit.Case
-  doctest AuthService
+  doctest Auth
 
 
   test "should set active state of user" do
     user = AuthServiceTest.User.HelpersTest.create_user()
     assert Map.get(user, :active) == true
 
-    {:ok, new_active_state_user} = AuthService.Services.User.SetActive.call(%{
+    {:ok, new_active_state_user} = Auth.Services.User.SetActive.call(%{
       "locale" => AuthServiceTest.User.HelpersTest.test_locale,
-      "id" => AuthServiceTest.User.HelpersTest.test_id,
+      "id" => Map.get(user, :id),
       "active" => false
     })
-    AuthService.Repo.delete!(user)
+    Auth.Repo.delete!(user)
 
     assert Map.get(new_active_state_user, :active) == false
   end

@@ -11,11 +11,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :auth_service, key: :value
+#     config :auth, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:auth_service, :key)
+#     Application.get_env(:auth, :key)
 #
 # Or configure a 3rd-party app:
 #
@@ -30,4 +30,4 @@ use Mix.Config
 #
 import_config "#{Mix.env}.exs"
 
-config :auth_service, ecto_repos: []
+config :auth, ecto_repos: []

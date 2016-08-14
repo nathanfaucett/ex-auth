@@ -1,5 +1,5 @@
-defmodule AuthService.Services.User.SetActive do
-  import AuthService.Gettext
+defmodule Auth.Services.User.SetActive do
+  import Auth.Gettext
 
 
   def prop_types do
@@ -16,10 +16,10 @@ defmodule AuthService.Services.User.SetActive do
     if errors != nil do
       {:error, errors}
     else
-      Gettext.put_locale(AuthService.Gettext, Map.get(params, "locale"))
+      Gettext.put_locale(Auth.Gettext, Map.get(params, "locale"))
 
       id = Map.get(params, "id")
-      user = AuthService.Repo.get_by(AuthService.Models.User, id: id)
+      user = Auth.Repo.get_by(Auth.Models.User, id: id)
 
       if !user do
         {:error, %{"errors" => [RuntimeError.exception(gettext("user_not_found"))]}}
@@ -29,7 +29,7 @@ defmodule AuthService.Services.User.SetActive do
         if Map.get(user, :active) == active do
           {:ok, user}
         else
-          {ok, new_active_state_user} = AuthService.Repo.update(AuthService.Models.User.changeset(user, %{
+          {ok, new_active_state_user} = Auth.Repo.update(Auth.Models.User.changeset(user, %{
             :active => active,
           }))
 

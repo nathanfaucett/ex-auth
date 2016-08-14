@@ -1,10 +1,10 @@
 use Mix.Config
 
 
-config :auth_service, AuthService.Repo,
+config :auth, Auth.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "dev",
   password: "dev",
-  database: "auth_service",
+  database: "auth",
   hostname: "localhost",
   pool_size: 10

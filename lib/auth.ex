@@ -1,4 +1,4 @@
-defmodule AuthService do
+defmodule Auth do
   use Application
 
 
@@ -6,10 +6,10 @@ defmodule AuthService do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(AuthService.Repo, [])
+      worker(Auth.Repo, [])
     ]
 
-    opts = [strategy: :one_for_one, name: AuthService.Supervisor]
+    opts = [strategy: :one_for_one, name: Auth.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

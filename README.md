@@ -1,4 +1,4 @@
-# AuthService [![Build Status](https://travis-ci.org/nathanfaucett/ex-auth_service.svg?branch=master)](https://travis-ci.org/nathanfaucett/ex-auth_service)
+# Auth [![Build Status](https://travis-ci.org/nathanfaucett/ex-auth.svg?branch=master)](https://travis-ci.org/nathanfaucett/ex-auth)
 
 auth services api for managing users in applications
 
@@ -6,9 +6,9 @@ auth services api for managing users in applications
 
 ```bash
 # create the database
-$ mix ecto.create -r AuthService.Repo
+$ mix ecto.create -r Auth.Repo
 # run the migrations
-$ mix ecto.migrate -r AuthService.Repo
+$ mix ecto.migrate -r Auth.Repo
 
 $ mix test
 ```
@@ -17,16 +17,16 @@ $ mix test
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
-  1. Add auth_service to your list of dependencies in `mix.exs`:
+  1. Add auth to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:auth_service, "~> 0.0.1"}]
+          [{:auth, "~> 0.0.1"}]
         end
 
-  2. Ensure auth_service is started before your application:
+  2. Ensure auth is started before your application:
 
         def application do
-          [applications: [:auth_service]]
+          [applications: [:auth]]
         end
 
 
@@ -34,16 +34,16 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 ```elixir
 # Main Modules
-# AuthService.Repo
-# AuthService.Models.User
-# AuthService.Services.User
+# Auth.Repo
+# Auth.Models.User
+# Auth.Services.User
 
 defmodule Example do
 
   def example() do
 
     # create user from email and password
-    {:ok, user} = AuthService.Services.User.CreateUserPassword.call(%{
+    {:ok, user} = Auth.Services.User.CreateUserPassword.call(%{
         "email" => "some_email@domain.com",
         "password" => "some_password"
     })

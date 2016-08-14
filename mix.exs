@@ -1,8 +1,8 @@
-defmodule AuthService.Mixfile do
+defmodule Auth.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :auth_service,
+    [app: :auth,
      version: "0.0.1",
      description: description,
      package: package,
@@ -24,7 +24,7 @@ defmodule AuthService.Mixfile do
       :prop_types,
       :uuid,
       :comeonin],
-      mod: {AuthService, []}]
+      mod: {Auth, []}]
   end
 
   # Dependencies can be Hex packages:
@@ -53,13 +53,13 @@ defmodule AuthService.Mixfile do
 
   defp package do
     [# These are the default files included in the package
-      name: :auth_service,
+      name: :auth,
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
       maintainers: ["Nathan Faucett"],
       licenses: ["MIT"],
       links: %{
-        "GitHub" => "https://github.com/nathanfaucett/ex-auth_service",
-        "Docs" => "https://github.com/nathanfaucett/ex-auth_service"
+        "GitHub" => "https://github.com/nathanfaucett/ex-auth",
+        "Docs" => "https://github.com/nathanfaucett/ex-auth"
       }
     ]
   end

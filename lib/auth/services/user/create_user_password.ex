@@ -1,6 +1,6 @@
-defmodule AuthService.Services.User.CreateUserPassword do
+defmodule Auth.Services.User.CreateUserPassword do
   alias Comeonin.Bcrypt
-  import AuthService.Gettext
+  import Auth.Gettext
 
 
   def prop_types do
@@ -17,20 +17,20 @@ defmodule AuthService.Services.User.CreateUserPassword do
     if errors != nil do
       {:error, errors}
     else
-      Gettext.put_locale(AuthService.Gettext, Map.get(params, "locale"))
+      Gettext.put_locale(Auth.Gettext, Map.get(params, "locale"))
 
       email = Map.get(params, "email")
-      id = UUID.uuid5(:dns, email)
+      id = Auth.Utils.create_uuid()
 
       password = Map.get(params, "password")
       encrypted_password = Bcrypt.hashpwsalt(password)
 
-      {ok, user} = AuthService.Repo.insert(AuthService.Models.User.changeset(%AuthService.Models.User{}, %{
+      {ok, user} = Auth.Repo.insert(Auth.Models.User.changeset(%Auth.Models.User{}, %{
         :id => id,
         :email => email,
 
         :confirmed => false,
-        :confirmation_token => AuthService.Utils.create_token(),
+        :confirmation_token => Auth.Utils.create_token(),
 
         :encrypted_password => encrypted_password
       }))

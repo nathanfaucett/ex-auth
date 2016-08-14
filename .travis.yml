@@ -7,5 +7,5 @@ services:
   - postgresql
 before_script:
   - psql -c "CREATE USER dev WITH PASSWORD 'dev' CREATEDB;" -U postgres
-  - mix ecto.create -r AuthService.Repo
-  - mix ecto.migrate -r AuthService.Repo
+  - mix ecto.create -r Auth.Repo
+  - mix ecto.migrate -r Auth.Repo

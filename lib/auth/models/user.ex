@@ -1,4 +1,4 @@
-defmodule AuthService.Models.User do
+defmodule Auth.Models.User do
   use Ecto.Schema
 
   import Ecto.Changeset
