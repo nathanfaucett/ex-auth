@@ -6,9 +6,9 @@ auth services api for managing users in applications
 
 ```bash
 # create the database
-$ mix ecto.create -r Auth.Repo
-# run the migrations
-$ mix ecto.migrate -r Auth.Repo
+$ mix ecto.drop -r Auth.Repo &&
+  mix ecto.create -r Auth.Repo &&
+  mix ecto.migrate -r Auth.Repo
 
 $ mix test
 ```

@@ -1,5 +1,4 @@
 defmodule Auth.Services.User.AuthorizedPassword do
-  alias Comeonin.Bcrypt
   import Auth.Gettext
 
 
@@ -23,7 +22,7 @@ defmodule Auth.Services.User.AuthorizedPassword do
       if user == nil do
         {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "No User found that matches email"))]}}
       else
-        if Bcrypt.checkpw(Map.get(params, "password"), Map.get(user, :encrypted_password)) do
+        if Auth.Utils.compare_encrypted(Map.get(params, "password"), Map.get(user, :encrypted_password)) do
           {:ok, user}
         else
           {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "Invalid Password"))]}}

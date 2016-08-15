@@ -1,5 +1,4 @@
 defmodule Auth.Services.User.ChangePassword do
-  alias Comeonin.Bcrypt
   import Auth.Gettext
 
 
@@ -24,9 +23,9 @@ defmodule Auth.Services.User.ChangePassword do
       if user == nil do
         {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "User not found"))]}}
       else
-        if Bcrypt.checkpw(Map.get(params, "old_password"), Map.get(user, :encrypted_password)) do
+        if Auth.Utils.compare_encrypted(Map.get(params, "old_password"), Map.get(user, :encrypted_password)) do
           {ok, new_password_user} = Auth.Repo.update(Auth.Models.User.changeset(user, %{
-            :encrypted_password => Bcrypt.hashpwsalt(Map.get(params, "new_password")),
+            :encrypted_password => Auth.Utils.encrypt(Map.get(params, "new_password")),
           }))
 
           if ok == :ok do

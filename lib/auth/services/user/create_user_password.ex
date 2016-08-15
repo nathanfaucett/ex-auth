@@ -1,5 +1,4 @@
 defmodule Auth.Services.User.CreateUserPassword do
-  alias Comeonin.Bcrypt
   import Auth.Gettext
 
 
@@ -25,7 +24,7 @@ defmodule Auth.Services.User.CreateUserPassword do
         :confirmed => false,
         :confirmation_token => Auth.Utils.create_token(),
 
-        :encrypted_password => Bcrypt.hashpwsalt(Map.get(params, "password"))
+        :encrypted_password => Auth.Utils.encrypt(Map.get(params, "password"))
       }))
 
       if ok == :ok do
