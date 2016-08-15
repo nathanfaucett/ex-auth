@@ -21,7 +21,7 @@ defmodule Auth.Services.User.AuthorizedPassword do
       user = Auth.Repo.get_by(Auth.Models.User, email: Map.get(params, "email"))
 
       if user == nil do
-        {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "User not found"))]}}
+        {:error, %{"errors" => [RuntimeError.exception(dgettext("errors", "No User found that matches email"))]}}
       else
         if Bcrypt.checkpw(Map.get(params, "password"), Map.get(user, :encrypted_password)) do
           {:ok, user}

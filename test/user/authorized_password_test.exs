@@ -20,9 +20,19 @@ defmodule AuthTest.User.AuthorizedPasswordTest do
       "email" => "invalid_email@domain.com",
       "password" => "invalid_password"
     })
+
+    error = Enum.at(Map.get(errors, "errors"), 0)
+    assert Map.get(error, :message) == "No User found that matches email"
+
+
+    {:error, errors} = Auth.Services.User.AuthorizedPassword.call(%{
+      "locale" => AuthTest.User.HelpersTest.test_locale,
+      "email" => AuthTest.User.HelpersTest.test_email,
+      "password" => "invalid_password"
+    })
     Auth.Repo.delete!(user)
 
     error = Enum.at(Map.get(errors, "errors"), 0)
-    assert Map.get(error, :message) == "User not found"
+    assert Map.get(error, :message) == "Invalid Password"
   end
 end

@@ -13,7 +13,7 @@ msgstr ""
 #: lib/auth/services/user/change_email.ex:38
 #: lib/auth/services/user/change_password.ex:35
 #: lib/auth/services/user/confirm.ex:37
-#: lib/auth/services/user/create_user_password.ex:35
+#: lib/auth/services/user/create_user_password.ex:34
 #: lib/auth/services/user/regenerate_confirmation_token.ex:35
 #: lib/auth/services/user/set_active.ex:38
 msgid "Internal Error"
@@ -33,11 +33,14 @@ msgstr ""
 msgid "User already confirmed"
 msgstr ""
 
-#: lib/auth/services/user/authorized_password.ex:24
 #: lib/auth/services/user/change_email.ex:23
 #: lib/auth/services/user/change_password.ex:25
-#: lib/auth/services/user/confirm.ex:24 lib/auth/services/user/get.ex:23
+#: lib/auth/services/user/confirm.ex:24
 #: lib/auth/services/user/regenerate_confirmation_token.ex:23
 #: lib/auth/services/user/set_active.ex:24
 msgid "User not found"
+msgstr ""
+
+#: lib/auth/services/user/authorized_password.ex:24
+msgid "No User found that matches email"
 msgstr ""
