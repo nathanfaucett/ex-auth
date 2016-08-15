@@ -1,4 +1,4 @@
-defmodule AuthServiceTest.User.HelpersTest do
+defmodule AuthTest.User.HelpersTest do
   use ExUnit.Case
   doctest Auth
 

@@ -1,14 +1,14 @@
-defmodule AuthServiceTest.User.ChangeEmailTest do
+defmodule AuthTest.User.ChangeEmailTest do
   use ExUnit.Case
   doctest Auth
 
 
   test "should change email and unconfirm user" do
-    user = AuthServiceTest.User.HelpersTest.create_user()
-    old_email = AuthServiceTest.User.HelpersTest.test_email
+    user = AuthTest.User.HelpersTest.create_user()
+    old_email = AuthTest.User.HelpersTest.test_email
 
     {:ok, new_email_user} = Auth.Services.User.ChangeEmail.call(%{
-      "locale" => AuthServiceTest.User.HelpersTest.test_locale,
+      "locale" => AuthTest.User.HelpersTest.test_locale,
       "id" => Map.get(user, :id),
       "email" => "new_email@domain.com"
     })

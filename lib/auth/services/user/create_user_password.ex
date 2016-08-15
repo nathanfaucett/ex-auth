@@ -20,7 +20,6 @@ defmodule Auth.Services.User.CreateUserPassword do
       Gettext.put_locale(Auth.Gettext, Map.get(params, "locale"))
 
       {ok, user} = Auth.Repo.insert(Auth.Models.User.changeset(%Auth.Models.User{}, %{
-        :id => Auth.Utils.create_uuid(),
         :email => Map.get(params, "email"),
 
         :confirmed => false,
