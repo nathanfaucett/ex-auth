@@ -20,6 +20,7 @@ defmodule Auth.Mixfile do
   def application do
     [applications: [
       :gettext,
+      :poison,
       :postgrex,
       :ecto,
       :prop_types,
@@ -38,6 +39,7 @@ defmodule Auth.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:gettext, "~> 0.8"},
+      {:poison, "~> 2.2.0"},
       {:postgrex, "~> 0.11.2"},
       {:ecto, "~> 2.0.4"},
       {:prop_types, git: "git://github.com/nathanfaucett/ex-prop_types.git"},
