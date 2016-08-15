@@ -6,9 +6,7 @@ auth services api for managing users in applications
 
 ```bash
 # create the database
-$ mix ecto.drop -r Auth.Repo &&
-  mix ecto.create -r Auth.Repo &&
-  mix ecto.migrate -r Auth.Repo
+$ mix ecto.drop -r Auth.Repo && mix ecto.create -r Auth.Repo && mix ecto.migrate -r Auth.Repo
 
 $ mix test
 ```
@@ -41,15 +39,11 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 defmodule Example do
 
   def example() do
-
     # create user from email and password
     {:ok, user} = Auth.Services.User.CreateUserPassword.call(%{
         "email" => "some_email@domain.com",
         "password" => "some_password"
     })
-
-    # get uuid of user
-    uuid = Map.get(user, :uuid)
   end
 end
 
